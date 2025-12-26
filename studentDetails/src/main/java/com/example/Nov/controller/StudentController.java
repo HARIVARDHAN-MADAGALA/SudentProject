@@ -6,6 +6,7 @@ import com.example.Nov.entity.Department;
 import com.example.Nov.entity.Student;
 import com.example.Nov.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +23,13 @@ public class StudentController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public List<Student> getAllStudent(){
         return studentService.getAllStudents();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER')")
     public Student getStudent(@PathVariable Long id){
         return studentService.getStudent(id);
     }
@@ -35,6 +38,7 @@ public class StudentController {
     public Department getDepartmentByStudent(@PathVariable Long id){
         return studentService.getDepartmentByStudent(id);
     }
+
 
     @PostMapping
     public void addStudent(@RequestBody StudentDto studentDto){
