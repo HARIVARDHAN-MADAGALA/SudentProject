@@ -1,7 +1,8 @@
-version: "3.8"
-
 services:
 
+  # =========================
+  # MySQL - Student Service
+  # =========================
   mysql:
     image: mysql:8.0
     container_name: student-mysql
@@ -14,20 +15,28 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  # =========================
+  # Address Service (MongoDB Atlas)
+  # =========================
   address-service:
     image: harivardhanm/address-details-app:latest
     container_name: address-service
     restart: always
     ports:
       - "8082:8082"
+    environment:
+      MONGO_PASSWORD: Srinurajee1999
 
+  # =========================
+  # Student Service
+  # =========================
   student-app:
     image: harivardhanm/student-details-app:latest
     container_name: student-details-container
+    restart: always
     depends_on:
       - mysql
       - address-service
-    restart: always
     ports:
       - "8080:8080"
     environment:
