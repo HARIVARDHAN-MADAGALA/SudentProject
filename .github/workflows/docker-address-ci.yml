@@ -1,0 +1,35 @@
+name: Build & Push Address Docker Image
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "addressDetails/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build Address Service
+        run: mvn -pl addressDetails clean package -DskipTests
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t harivardhanm/address-details-app:latest ./addressDetails
+
+      - name: Push Docker image
+        run: docker push harivardhanm/address-details-app:latest
