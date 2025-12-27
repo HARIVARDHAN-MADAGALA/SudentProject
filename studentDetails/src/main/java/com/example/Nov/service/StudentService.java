@@ -52,10 +52,12 @@ public class StudentService {
         this.addressFeignClient = addressFeignClient;
     }
 
+//    get all students
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
     }
 
+//    get student by student id
     public Student getStudent(Long id){
 
             log.info("Request received to fetch student with id {}" + id);
@@ -63,26 +65,29 @@ public class StudentService {
         return studentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Student not found" + id));
     }
 
+//    get department by student id
     public Department getDepartmentByStudent(Long id){
-        return studentRepository.findById(id).get().getDepartment();
+        Student student = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(" Student is not Exists with id " + id));
+        return student.getDepartment();
     }
 
-    //post
-
+    // inserting student by checking department id if present
     public void addStudent(StudentDto studentDto){
-        Student student = new Student();
-        student.setStdname(studentDto.name);
-        Department department = departmentRepository.findById(studentDto.departmentid).get();
+            Student student = new Student();
+            student.setStdname(studentDto.getName());
+        Department department = departmentRepository.findById(studentDto.getDepartmentid()).orElseThrow(() -> new ResourceNotFoundException("Department is not found for id" + studentDto.getDepartmentid()));
         student.setDepartment(department);
         studentRepository.save(student);
     }
 
+//    inserting department
     public void addDepartment(String deptname){
         Department department = new Department();
         department.setDepname(deptname);
         departmentRepository.save(department);
     }
 
+    //    get address by name form addres service
     public Adressdto getAddressByname(String name){
 
 //        return restClient.getAdress(name);
