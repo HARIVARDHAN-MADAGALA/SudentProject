@@ -11,7 +11,6 @@
     <modules>
         <module>studentDetails</module>
         <module>addressDetails</module>
-        <module>spring-boot-admin-server</module>
     </modules>
 
     <properties>
@@ -32,13 +31,13 @@
             </dependency>
 
             <!-- Spring Boot Admin BOM -->
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-dependencies</artifactId>
-                <version>3.2.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>de.codecentric</groupId>-->
+<!--                <artifactId>spring-boot-admin-dependencies</artifactId>-->
+<!--                <version>3.2.1</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
 
         </dependencies>
     </dependencyManagement>
