@@ -10,10 +10,13 @@ import com.example.Nov.repository.DepartmentRepository;
 import com.example.Nov.repository.StudentRepository;
 import com.example.Nov.restconfig.RestClient;
 import com.example.Nov.webclientConfig.WebClientclass;
+import jakarta.transaction.Transactional;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,17 +68,17 @@ public class StudentService {
         return studentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Student not found" + id));
     }
 
-//    get department by student id
-    public Department getDepartmentByStudent(Long id){
-        Student student = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(" Student is not Exists with id " + id));
+//    get department by student name
+    public Department getDepartmentByStudent(String name){
+        Student student = studentRepository.findByStdname(name).orElseThrow(() -> new ResourceNotFoundException(" Student is not Exists with id " + name));
         return student.getDepartment();
     }
 
-    // inserting student by checking department id if present
+    // inserting student by checking department name if present
     public void addStudent(StudentDto studentDto){
             Student student = new Student();
             student.setStdname(studentDto.getName());
-        Department department = departmentRepository.findById(studentDto.getDepartmentid()).orElseThrow(() -> new ResourceNotFoundException("Department is not found for id" + studentDto.getDepartmentid()));
+        Department department = departmentRepository.findByDepname(studentDto.getDepartmentName()).orElseThrow(() -> new ResourceNotFoundException("Department is not found for id" + studentDto.getDepartmentName()));
         student.setDepartment(department);
         studentRepository.save(student);
     }
@@ -97,6 +100,32 @@ public class StudentService {
 
     }
 
+    // update the dept
+    public void updateStudent (String name, StudentDto studentDto){
+
+        Student student = studentRepository.findByStdname(name).orElseThrow(() ->new RuntimeException("Student not found"));
+
+        Department department = departmentRepository.findByDepname(studentDto.getDepartmentName()).orElseThrow(()->new RuntimeException("DEpt not found"));
+
+            student.setDepartment(department);
+
+            studentRepository.save(student);
+    }
+
+    // Delete the student by name
+    @Transactional
+    public void deleteByStudentname(String name){
+
+        Optional<Student> student = studentRepository.findByStdname(name);
+
+        if (student.isPresent()){
+            studentRepository.deleteByStdname(name);
+        }
+        else {
+            throw new RuntimeException("Student not found with name: " + name);
+        }
+
+    }
 }
 
 

@@ -4,7 +4,7 @@ public class StudentDto {
 
     private String name;
 
-    private Long departmentid;
+    private String departmentName;
 
     public String getName() {
         return name;
@@ -14,11 +14,11 @@ public class StudentDto {
         this.name = name;
     }
 
-    public Long getDepartmentid() {
-        return departmentid;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartmentid(Long departmentid) {
-        this.departmentid = departmentid;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

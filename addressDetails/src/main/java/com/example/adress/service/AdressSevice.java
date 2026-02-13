@@ -1,10 +1,12 @@
 package com.example.adress.service;
 
 
-import com.example.adress.dto.AdressDto;
+import com.example.adress.dto.AddressDto;
 import com.example.adress.entity.StudentAdress;
 import com.example.adress.reposititory.StudentAdressRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdressSevice {
@@ -16,25 +18,33 @@ public class AdressSevice {
         this.studentAdressRepository = studentAdressRepository;
     }
 
-    public AdressDto getStudentAdress(String id){
+//    get all address
+    public List<StudentAdress> getStudentAdress(){
 
-        AdressDto adressDto = new AdressDto();
-        adressDto.setId(id);
-        adressDto.setName(studentAdressRepository.findById(id).get().getName());
-        adressDto.setAddress(studentAdressRepository.findById(id).get().getAddress());
-
-        return adressDto;
+        return studentAdressRepository.findAll();
     }
 
-    public AdressDto getAddess(String name) {
+    // get the address from student name
+    public AddressDto getAddess(String name) {
 
         StudentAdress entity = studentAdressRepository.findByName(name);
-        AdressDto adressDto = new AdressDto();
+        AddressDto AddressDto = new AddressDto();
 
-        adressDto.setId(entity.getId());
-        adressDto.setName(entity.getName());
-        adressDto.setAddress(entity.getAddress());
+        AddressDto.setId(entity.getId());
+        AddressDto.setName(entity.getName());
+        AddressDto.setAddress(entity.getAddress());
 
-        return adressDto;
+        return AddressDto;
+    }
+
+    // insert the address
+
+    public void addAddress(AddressDto addressDto){
+
+        StudentAdress studentAdress = new StudentAdress();
+        studentAdress.setName(addressDto.getName());
+        studentAdress.setAddress(addressDto.getAddress());
+
+        studentAdressRepository.save(studentAdress);
     }
 }

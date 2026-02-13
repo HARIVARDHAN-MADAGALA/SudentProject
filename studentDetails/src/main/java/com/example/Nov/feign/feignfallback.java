@@ -1,18 +1,18 @@
 package com.example.Nov.feign;
 
-import com.example.Nov.dto.Adressdto;
+import com.example.Nov.dto.AddressDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 
 @Component
 public class feignfallback implements AddressFeignClient {
     @Override
-    public Adressdto getAdress(String name) {
-        Adressdto adressdto = new Adressdto();
+    public AddressDto getAdress(String name) {
+        AddressDto AddressDto = new AddressDto();
 
-        adressdto.setName(name);
-        adressdto.setAddress("Address not avaliable");
+        AddressDto.setName(name);
+        AddressDto.setAddress("Address not avaliable");
 
-        return adressdto;
+        return AddressDto;
     }
 }

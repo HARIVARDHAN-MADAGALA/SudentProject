@@ -37,11 +37,13 @@ public class StudentController {
     }
 
 //    get department by student id
-    @GetMapping("/department/{id}")
-    public Department getDepartmentByStudent(@PathVariable Long id){
-        return studentService.getDepartmentByStudent(id);
+    @GetMapping("/department/{name}")
+    public Department getDepartmentByStudent(@PathVariable String name){
+        return studentService.getDepartmentByStudent(name);
     }
 
+
+//    inserting the students
     @PostMapping
     public void addStudent(@RequestBody StudentDto studentDto){
         studentService.addStudent(studentDto);
@@ -60,5 +62,18 @@ public class StudentController {
         return studentService.getAddressByname(name);
     }
 
+    // updating the department
+    @PutMapping("/updateDept/{name}")
+    public void updateByname(@PathVariable String name, @RequestBody StudentDto studentDto){
+
+
+        studentService.updateStudent(name, studentDto);
+    }
+
+    // delete the student
+    @DeleteMapping("/name/{name}")
+    public void deleteByStudentName(@PathVariable String name){
+         studentService.deleteByStudentname(name);
+    }
 }
 
