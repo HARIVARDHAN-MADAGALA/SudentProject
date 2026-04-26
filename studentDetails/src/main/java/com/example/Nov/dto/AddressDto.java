@@ -1,6 +1,6 @@
 package com.example.Nov.dto;
 
-public class Adressdto {
+public class AddressDto {
 
     private String id;
     private String name;

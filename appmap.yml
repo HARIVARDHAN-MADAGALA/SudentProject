@@ -1,0 +1,6 @@
+language: "java"
+name: "StudentProject"
+appmap_dir: "tmp/appmap"
+packages:
+- path: "com.example.adress"
+- path: "com.example.Nov"

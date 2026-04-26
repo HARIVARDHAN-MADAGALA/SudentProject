@@ -1,7 +1,7 @@
 package com.example.Nov.feign;
 
 
-import com.example.Nov.dto.Adressdto;
+import com.example.Nov.dto.AddressDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,5 +11,5 @@ public interface AddressFeignClient {
 
 
     @GetMapping("/address/name/{name}")
-    Adressdto getAdress(@PathVariable String name);
+    AddressDto getAdress(@PathVariable String name);
 }

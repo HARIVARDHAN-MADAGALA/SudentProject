@@ -1,6 +1,6 @@
 package com.example.Nov.restconfig;
 
-import com.example.Nov.dto.Adressdto;
+import com.example.Nov.dto.AddressDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,10 +14,10 @@ public class RestClient {
     }
 
 
-    public Adressdto getAdress(String name) {
+    public AddressDto getAdress(String name) {
 
         String url = "http://localhost:8082/address/name/" + name;
 
-        return restTemplate.getForObject(url, Adressdto.class);
+        return restTemplate.getForObject(url, AddressDto.class);
     }
 }

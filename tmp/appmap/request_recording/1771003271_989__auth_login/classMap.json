@@ -1,0 +1,130 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "doFilterInternal",
+                            "type": "function",
+                            "static": false,
+                            "location": "studentDetails/src/main/java/com/example/Nov/security/jwt/JwtAuthenticationFilter.java:35"
+                          }
+                        ],
+                        "name": "JwtAuthenticationFilter",
+                        "type": "class"
+                      },
+                      {
+                        "children": [
+                          {
+                            "name": "generateToken",
+                            "type": "function",
+                            "static": false,
+                            "location": "studentDetails/src/main/java/com/example/Nov/security/jwt/JwtService.java:26"
+                          }
+                        ],
+                        "name": "JwtService",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "jwt",
+                    "type": "package"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "login",
+                            "type": "function",
+                            "static": false,
+                            "location": "studentDetails/src/main/java/com/example/Nov/security/controller/AuthController.java:25"
+                          }
+                        ],
+                        "name": "AuthController",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "controller",
+                    "type": "package"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "findByUsername",
+                            "type": "function",
+                            "static": false,
+                            "location": "studentDetails/src/main/java/com/example/Nov/security/repository/UserRepository.java:-1"
+                          }
+                        ],
+                        "name": "UserRepository",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "repository",
+                    "type": "package"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "name": "loadUserByUsername",
+                            "type": "function",
+                            "static": false,
+                            "location": "studentDetails/src/main/java/com/example/Nov/security/service/CustomUserDetailsService.java:23"
+                          }
+                        ],
+                        "name": "CustomUserDetailsService",
+                        "type": "class"
+                      }
+                    ],
+                    "name": "service",
+                    "type": "package"
+                  }
+                ],
+                "name": "security",
+                "type": "package"
+              }
+            ],
+            "name": "Nov",
+            "type": "package"
+          }
+        ],
+        "name": "example",
+        "type": "package"
+      }
+    ],
+    "name": "com",
+    "type": "package"
+  },
+  {
+    "type": "http",
+    "name": "HTTP server requests",
+    "children": [
+      {
+        "type": "route",
+        "name": "POST /auth/login"
+      }
+    ]
+  },
+  {
+    "type": "database",
+    "name": "Database",
+    "children": [
+      {
+        "type": "query",
+        "name": "select u1_0.id,u1_0.password,u1_0.role,u1_0.username from users u1_0 where u1_0.username=?"
+      }
+    ]
+  }
+]

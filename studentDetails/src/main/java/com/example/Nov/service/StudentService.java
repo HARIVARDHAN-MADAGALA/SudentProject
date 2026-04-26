@@ -1,15 +1,15 @@
 package com.example.Nov.service;
 
-import com.example.Nov.dto.Adressdto;
+import com.example.Nov.dto.AddressDto;
 import com.example.Nov.dto.StudentDto;
 import com.example.Nov.entity.Department;
 import com.example.Nov.entity.Student;
 import com.example.Nov.exception.ResourceNotFoundException;
 import com.example.Nov.feign.AddressFeignClient;
+import com.example.Nov.httpClientConfig.blocking.HttpClientConfig;
+import com.example.Nov.httpClientConfig.non_blocking.HttpClientConfig_nonBlocking;
 import com.example.Nov.repository.DepartmentRepository;
 import com.example.Nov.repository.StudentRepository;
-import com.example.Nov.restconfig.RestClient;
-import com.example.Nov.webclientConfig.WebClientclass;
 import jakarta.transaction.Transactional;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class StudentService {
@@ -26,12 +25,11 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final DepartmentRepository departmentRepository;
-    private static final Logger log =
-            LoggerFactory.getLogger(StudentService.class);
+    private static final Logger log = LoggerFactory.getLogger(StudentService.class);
+
     //  for resttemplate
 //    private final RestClient restClient;
 //
-//    //Getting
 //    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, RestClient restClient){
 //        this.studentRepository= studentRepository;
 //        this.departmentRepository = departmentRepository;
@@ -47,13 +45,45 @@ public class StudentService {
 //        this.webClientclass = webClientclass;
 //    }
 
-    private final AddressFeignClient addressFeignClient;
+//    For Feign Client
+//    private final AddressFeignClient addressFeignClient;
+//
+//    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, AddressFeignClient addressFeignClient){
+//        this.studentRepository= studentRepository;
+//        this.departmentRepository = departmentRepository;
+//        this.addressFeignClient = addressFeignClient;
+//    }
 
-    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, AddressFeignClient addressFeignClient){
-        this.studentRepository= studentRepository;
+//    For HttpClient
+
+    private final HttpClientConfig httpClientConfig;
+
+    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, HttpClientConfig httpClientConfig) {
+        this.studentRepository = studentRepository;
         this.departmentRepository = departmentRepository;
-        this.addressFeignClient = addressFeignClient;
+        this.httpClientConfig = httpClientConfig;
     }
+
+//    For HttpClient_NonBlocking
+
+//    private final HttpClientConfig_nonBlocking httpClientConfig_nonBlocking;
+//
+//    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, HttpClientConfig_nonBlocking httpClientConfig_nonBlocking) {
+//        this.studentRepository = studentRepository;
+//        this.departmentRepository = departmentRepository;
+//        this.httpClientConfig_nonBlocking = httpClientConfig_nonBlocking;
+//    }
+
+//For HttpUrlConnection_Old
+
+//    private final HttpUrlConnection_Old httpUrlConnection_old;
+//
+//    public StudentService(StudentRepository studentRepository, DepartmentRepository departmentRepository, HttpUrlConnection_Old httpUrlConnection_old) {
+//        this.studentRepository = studentRepository;
+//        this.departmentRepository = departmentRepository;
+//        this.httpUrlConnection_old = httpUrlConnection_old;
+//    }
+
 
 //    get all students
     public List<Student> getAllStudents(){
@@ -91,11 +121,15 @@ public class StudentService {
     }
 
     //    get address by name form addres service
-    public Adressdto getAddressByname(String name){
+    public AddressDto getAddressByname(String name){
 
 //        return restClient.getAdress(name);
 //        return webClientclass.getAdress(name);
-          return addressFeignClient.getAdress(name);
+//          return addressFeignClient.getAdress(name);
+        return httpClientConfig.getAdress(name);
+//          return httpUrlConnection_old.getAdress(name);
+//        return httpClientConfig_nonBlocking.getAdress(name);
+
 
 
     }

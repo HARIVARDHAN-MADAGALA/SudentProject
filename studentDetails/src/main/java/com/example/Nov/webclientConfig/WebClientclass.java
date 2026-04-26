@@ -1,6 +1,6 @@
 package com.example.Nov.webclientConfig;
 
-import com.example.Nov.dto.Adressdto;
+import com.example.Nov.dto.AddressDto;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -13,12 +13,12 @@ public class WebClientclass {
         this.webClient = webClient;
     }
 
-    public Adressdto getAdress(String name) {
+    public AddressDto getAdress(String name) {
 
         return webClient.get()
                 .uri("/address/name/{name}",name)
                 .retrieve()
-                .bodyToMono(Adressdto.class)
+                .bodyToMono(AddressDto.class)
                 .block();
     }
 }

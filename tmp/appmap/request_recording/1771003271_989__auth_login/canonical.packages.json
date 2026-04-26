@@ -1,0 +1,6 @@
+[
+  "com/example/Nov/security/controller",
+  "com/example/Nov/security/jwt",
+  "com/example/Nov/security/repository",
+  "com/example/Nov/security/service"
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "class": "io.jsonwebtoken.ExpiredJwtException",
+    "message": "JWT expired at 2026-02-13T14:53:31Z. Current time: 2026-02-13T17:22:01Z, a difference of 8910004 milliseconds.  Allowed clock skew: 0 milliseconds.",
+    "stack": [
+      "DefaultJwtParser.java:427",
+      "studentDetails/src/main/java/com/example/Nov/security/jwt/JwtAuthenticationFilter.java:35"
+    ],
+    "location": "DefaultJwtParser.java:427"
+  },
+  {
+    "class": "io.jsonwebtoken.ExpiredJwtException",
+    "message": "JWT expired at 2026-02-13T14:53:31Z. Current time: 2026-02-13T17:22:01Z, a difference of 8910004 milliseconds.  Allowed clock skew: 0 milliseconds.",
+    "stack": [
+      "DefaultJwtParser.java:427",
+      "studentDetails/src/main/java/com/example/Nov/security/jwt/JwtService.java:38",
+      "studentDetails/src/main/java/com/example/Nov/security/jwt/JwtAuthenticationFilter.java:35"
+    ],
+    "location": "DefaultJwtParser.java:427"
+  }
+]
